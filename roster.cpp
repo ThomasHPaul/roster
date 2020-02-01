@@ -3,10 +3,31 @@
 
 Student* classRosterArray[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
-void Roster::add(std::string studentId, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysIncourse1, int daysInCourse2, int daysInCourse3, Degree degreeType)
+void Roster::add(std::string studentId, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeType)
 {
 
+    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    {
+        if (classRosterArray[i] == nullptr)
+        {
+            switch (degreeType)
+            {
+            case NETWORK:
+                std::cout << "Network student initialized\n";
+                return;
 
+            case SECURITY:
+                std::cout << "Security student initialized\n";
+                return;
+
+            case SOFTWARE:
+                std::cout << "Software student initialized\n";
+                return;
+
+            // No default defined because enum type will only allow one of the 3 choices above
+            }
+        }
+    }
 
 
     // initialize student
@@ -17,50 +38,60 @@ void Roster::add(std::string studentId, std::string firstName, std::string lastN
         // determine first nullptr position
         // assign student pointer var into first nullptr position
 
-    if (degreeType == NETWORK)
-    {
-        std::cout << "Network student initialized\n";
-        /*
-            NetworkStudent student = new NetworkStudent(
-                tempId,
-                tempFirstName,
-                tempLastName,
-                tempEmail,
-                tempAge,
-                tempDaysToComplete3Courses,
-                NETWORK);
-        */
-    }
+    //if (degreeType == NETWORK)
+    //{
+    //    std::cout << "Network student initialized\n";
+    //    
+    //        classRosterArray[i] = new NetworkStudent(
+    //            studentId,
+    //            firstName,
+    //            lastName,
+    //            emailAddress,
+    //            age,
+    //            daysInCourse1,
+    //            daysInCourse2,
+    //            daysInCourse3,
+    //            degreeType);
+    //    
 
-    else if (degreeType == SECURITY)
-    {
-        std::cout << "Security student initialized\n";
-        /*
-            NetworkStudent student = new NetworkStudent(
-                tempId,
-                tempFirstName,
-                tempLastName,
-                tempEmail,
-                tempAge,
-                tempDaysToComplete3Courses,
-                SECURITY);
-        */
-    }
+    //    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    //    {
+    //        if (classRosterArray[i] == nullptr)
+    //        {
+    //            classRosterArray[i] = student&;
+    //        }
+    //    }
+    //}
 
-    else
-    {
-        std::cout << "Software student initialized\n";
-        /*
-            NetworkStudent student = new NetworkStudent(
-                tempId,
-                tempFirstName,
-                tempLastName,
-                tempEmail,
-                tempAge,
-                tempDaysToComplete3Courses,
-                SOFTWARE);
-        */
-    }
+    //else if (degreeType == SECURITY)
+    //{
+    //    std::cout << "Security student initialized\n";
+    //    /*
+    //        NetworkStudent student = new NetworkStudent(
+    //            tempId,
+    //            tempFirstName,
+    //            tempLastName,
+    //            tempEmail,
+    //            tempAge,
+    //            tempDaysToComplete3Courses,
+    //            SECURITY);
+    //    */
+    //}
+
+    //else
+    //{
+    //    std::cout << "Software student initialized\n";
+    //    /*
+    //        NetworkStudent student = new NetworkStudent(
+    //            tempId,
+    //            tempFirstName,
+    //            tempLastName,
+    //            tempEmail,
+    //            tempAge,
+    //            tempDaysToComplete3Courses,
+    //            SOFTWARE);
+    //    */
+    //}
 
 
 }
@@ -199,7 +230,7 @@ int main()
             }
         }
 
-        // add student
+        
         oldCommaPosition = 0;
         currentCommaPosition = 0;
 
