@@ -1,9 +1,14 @@
+#include <array>
 #include "roster.h"
 
 Student* classRosterArray[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
 void Roster::add(std::string studentId, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysIncourse1, int daysInCourse2, int daysInCourse3, Degree degreeType)
 {
+
+
+
+
     // initialize student
         // Student(pass params)
     
@@ -11,6 +16,53 @@ void Roster::add(std::string studentId, std::string firstName, std::string lastN
         // assign student pointer into variable
         // determine first nullptr position
         // assign student pointer var into first nullptr position
+
+    if (degreeType == NETWORK)
+    {
+        std::cout << "Network student initialized\n";
+        /*
+            NetworkStudent student = new NetworkStudent(
+                tempId,
+                tempFirstName,
+                tempLastName,
+                tempEmail,
+                tempAge,
+                tempDaysToComplete3Courses,
+                NETWORK);
+        */
+    }
+
+    else if (degreeType == SECURITY)
+    {
+        std::cout << "Security student initialized\n";
+        /*
+            NetworkStudent student = new NetworkStudent(
+                tempId,
+                tempFirstName,
+                tempLastName,
+                tempEmail,
+                tempAge,
+                tempDaysToComplete3Courses,
+                SECURITY);
+        */
+    }
+
+    else
+    {
+        std::cout << "Software student initialized\n";
+        /*
+            NetworkStudent student = new NetworkStudent(
+                tempId,
+                tempFirstName,
+                tempLastName,
+                tempEmail,
+                tempAge,
+                tempDaysToComplete3Courses,
+                SOFTWARE);
+        */
+    }
+
+
 }
 
 void Roster::remove(std::string studentId)
@@ -20,10 +72,13 @@ void Roster::remove(std::string studentId)
 
 void Roster::printAll()
 {
-    //for (Student& student : classRosterArray)
-    //{
-    //    student.print();
-    //}
+    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    {
+        if (classRosterArray[i] != nullptr)
+        {
+            classRosterArray[i]->print();
+        }
+    }
 }
 
 void Roster::printDaysInCourse(std::string studentId)
@@ -78,7 +133,7 @@ int main()
 
     std::cout << "Course: C867 \nLanguage: C++ \nStudent Id: #000917547 \nName: Thomas Paul\n\n";
 
-    //Roster classRoster;
+    Roster classRoster;
 
     // FIXME: add each student to classRoster
 
@@ -106,7 +161,22 @@ int main()
             {
                 tempStringDegreeType = student.substr(currentCommaPosition + 1);
 
+                if (tempStringDegreeType == "NETWORK")
+                {
+                    tempDegreeType = NETWORK;
+                }
 
+                else if (tempStringDegreeType == "SECURITY")
+                {
+                    tempDegreeType = SECURITY;
+                }
+
+                else
+                {
+                    tempDegreeType = SOFTWARE;
+                }
+
+                
                 tempId = tempStudentData[0];
                 tempFirstName = tempStudentData[1];
                 tempLastName = tempStudentData[2];
@@ -116,55 +186,16 @@ int main()
                 tempDaysToComplete3Courses[1] = std::stoi(tempStudentData[6]);
                 tempDaysToComplete3Courses[2] = std::stoi(tempStudentData[7]);
 
-                if (tempStringDegreeType == "NETWORK")
-                {
-                    std::cout << "Network student initialized\n";
-                    /*
-                        NetworkStudent student = new NetworkStudent(
-                            tempId,
-                            tempFirstName,
-                            tempLastName,
-                            tempEmail,
-                            tempAge,
-                            tempDaysToComplete3Courses,
-                            NETWORK);
-                    */
-                }
-
-                else if (tempStringDegreeType == "SECURITY")
-                {
-                    std::cout << "Security student initialized\n";
-                    /*
-                        NetworkStudent student = new NetworkStudent(
-                            tempId,
-                            tempFirstName,
-                            tempLastName,
-                            tempEmail,
-                            tempAge,
-                            tempDaysToComplete3Courses,
-                            SECURITY);
-                    */
-                }
-
-                else
-                {
-                    std::cout << "Software student initialized\n";
-                    /*
-                        NetworkStudent student = new NetworkStudent(
-                            tempId,
-                            tempFirstName,
-                            tempLastName,
-                            tempEmail,
-                            tempAge,
-                            tempDaysToComplete3Courses,
-                            SOFTWARE);
-                    */
-                }
-
-
-
-
-
+                
+                classRoster.add(tempId, 
+                                tempFirstName, 
+                                tempLastName, 
+                                tempEmail, 
+                                tempAge, 
+                                tempDaysToComplete3Courses[0], 
+                                tempDaysToComplete3Courses[1], 
+                                tempDaysToComplete3Courses[2], 
+                                tempDegreeType);
             }
         }
 
