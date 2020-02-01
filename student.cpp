@@ -7,7 +7,7 @@
 Student::Student()
 {	}
 
-Student::Student(std::string studentId, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysToComplete3Courses[], Degree degreeType)
+Student::Student(std::string studentId, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeType)
 {
 	this->studentId = studentId;
 	this->firstName = firstName;

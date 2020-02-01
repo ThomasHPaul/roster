@@ -9,7 +9,7 @@ class Student
 
 public:
 	Student();
-	Student(std::string studentId, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysToComplete3Courses[], Degree degreeType);
+	Student(std::string studentId, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeType);
 	void setStudentId(std::string studentId);
 	void setFirstName(std::string firstName);
 	void setLastName(std::string lastName);

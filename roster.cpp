@@ -1,5 +1,8 @@
 #include <array>
 #include "roster.h"
+#include "networkStudent.h"
+#include "securityStudent.h"
+#include "softwareStudent.h"
 
 Student* classRosterArray[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
@@ -13,17 +16,23 @@ void Roster::add(std::string studentId, std::string firstName, std::string lastN
             switch (degreeType)
             {
             case NETWORK:
+            {
+                classRosterArray[i] = new NetworkStudent(studentId, firstName, lastName, emailAddress, age, daysInCourse1, daysInCourse2, daysInCourse3, degreeType);
                 std::cout << "Network student initialized\n";
                 return;
-
+            }
             case SECURITY:
+            {
+                classRosterArray[i] = new SecurityStudent(studentId, firstName, lastName, emailAddress, age, daysInCourse1, daysInCourse2, daysInCourse3, degreeType);
                 std::cout << "Security student initialized\n";
                 return;
-
+            }
             case SOFTWARE:
+            {
+                classRosterArray[i] = new SoftwareStudent(studentId, firstName, lastName, emailAddress, age, daysInCourse1, daysInCourse2, daysInCourse3, degreeType);
                 std::cout << "Software student initialized\n";
                 return;
-
+            }
             // No default defined because enum type will only allow one of the 3 choices above
             }
         }

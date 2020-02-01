@@ -4,3 +4,4 @@ Degree NetworkStudent::getDegreeType()
 {
 	return degreeType;
 }
+

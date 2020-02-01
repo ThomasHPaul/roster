@@ -4,11 +4,14 @@
 
 class NetworkStudent : public Student
 {
+	using Student::Student;
+
 protected:
 	Degree degreeType = NETWORK;
 
 public:
-	using Student::Student;
-	Degree getDegreeType() override;
+
+	 Degree getDegreeType() override;
 };
+
 
