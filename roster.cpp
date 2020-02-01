@@ -39,75 +39,18 @@ void Roster::add(std::string studentId, std::string firstName, std::string lastN
     }
 
 
-    // initialize student
-        // Student(pass params)
-    
-    // assign student pointer to spot first empty spot in array
-        // assign student pointer into variable
-        // determine first nullptr position
-        // assign student pointer var into first nullptr position
-
-    //if (degreeType == NETWORK)
-    //{
-    //    std::cout << "Network student initialized\n";
-    //    
-    //        classRosterArray[i] = new NetworkStudent(
-    //            studentId,
-    //            firstName,
-    //            lastName,
-    //            emailAddress,
-    //            age,
-    //            daysInCourse1,
-    //            daysInCourse2,
-    //            daysInCourse3,
-    //            degreeType);
-    //    
-
-    //    for (int i = 0; i < sizeof(classRosterArray); ++i)
-    //    {
-    //        if (classRosterArray[i] == nullptr)
-    //        {
-    //            classRosterArray[i] = student&;
-    //        }
-    //    }
-    //}
-
-    //else if (degreeType == SECURITY)
-    //{
-    //    std::cout << "Security student initialized\n";
-    //    /*
-    //        NetworkStudent student = new NetworkStudent(
-    //            tempId,
-    //            tempFirstName,
-    //            tempLastName,
-    //            tempEmail,
-    //            tempAge,
-    //            tempDaysToComplete3Courses,
-    //            SECURITY);
-    //    */
-    //}
-
-    //else
-    //{
-    //    std::cout << "Software student initialized\n";
-    //    /*
-    //        NetworkStudent student = new NetworkStudent(
-    //            tempId,
-    //            tempFirstName,
-    //            tempLastName,
-    //            tempEmail,
-    //            tempAge,
-    //            tempDaysToComplete3Courses,
-    //            SOFTWARE);
-    //    */
-    //}
-
 
 }
 
 void Roster::remove(std::string studentId)
 {
-    
+    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    {
+        if (studentId == classRosterArray[i]->getStudentId())
+        {
+            classRosterArray[i] = nullptr;
+        }
+    }
 }
 
 void Roster::printAll()
@@ -123,17 +66,65 @@ void Roster::printAll()
 
 void Roster::printDaysInCourse(std::string studentId)
 {
-
+    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    {
+        if (studentId == classRosterArray[i]->getStudentId())
+        {
+            classRosterArray[i]->getDaysToComplete3Courses();
+        }
+    }
 }
 
 void Roster::printInvalidEmails()
 {
+    int atPosition = 0;
+    int periodPosition = 0;
 
+    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    {
+        std::string emailAddress = classRosterArray[i]->getEmailAddress();
+
+        
+        for (const char character : emailAddress)
+        {
+            // check for spaces, if present then print email address
+            if (character == ' ')
+            {
+                std::cout << emailAddress;
+                break;
+            }
+
+            // if no spaces then check that both "@" & "." is present
+            else
+            {
+                atPosition = emailAddress.find('@');
+                periodPosition = emailAddress.find('.');
+
+                if (atPosition < 0 || periodPosition < 0)
+                {
+                    std::cout << emailAddress;
+                    break;
+                }
+
+            }
+
+
+
+// if any fail then print the email to console
+        }
+
+    }
 }
 
 void Roster::printByDegreeProgram(int degreeProgram)
 {
-
+    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    {
+        if (degreeProgram == classRosterArray[i]->getDegreeType())
+        {
+            classRosterArray[i]->print();
+        }
+    }
 }
 
 Roster::~Roster()
@@ -174,9 +165,6 @@ int main()
     std::cout << "Course: C867 \nLanguage: C++ \nStudent Id: #000917547 \nName: Thomas Paul\n\n";
 
     Roster classRoster;
-
-    // FIXME: add each student to classRoster
-
 
     for (std::string student : studentData)
     {
@@ -244,6 +232,15 @@ int main()
         currentCommaPosition = 0;
 
     }
+
+    //classRoster.printAll();
+    //classRoster.printAll();
+    classRoster.printInvalidEmails();
+
+    //for (int i = 0; i < sizeof(classRoster); ++i)
+    //{
+    //    std::cout << i;
+    //}
 
 
     return 0;
