@@ -5,11 +5,12 @@
 #include "softwareStudent.h"
 
 Student* classRosterArray[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
+int sizeOfRoster = sizeof(classRosterArray) / sizeof(classRosterArray[0]);
 
 void Roster::add(std::string studentId, std::string firstName, std::string lastName, std::string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeType)
 {
 
-    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    for (int i = 0; i < sizeOfRoster; ++i)
     {
         if (classRosterArray[i] == nullptr)
         {
@@ -37,36 +38,50 @@ void Roster::add(std::string studentId, std::string firstName, std::string lastN
             }
         }
     }
-
-
-
 }
 
 void Roster::remove(std::string studentId)
 {
-    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    for (int i = 0; i < sizeOfRoster; ++i)
     {
-        if (studentId == classRosterArray[i]->getStudentId())
+        if (classRosterArray[i] == nullptr)
         {
-            classRosterArray[i] = nullptr;
+            continue;
         }
+        else
+        {
+            if (studentId == classRosterArray[i]->getStudentId())
+            {
+                classRosterArray[i] = nullptr;
+                std::cout << "Student removed\n";
+                return;
+            }
+            else
+            {
+                continue;
+                //std::cout << "A student with this ID was not found\n";
+            }
+        }
+
     }
+    std::cout << "\n";
 }
 
 void Roster::printAll()
 {
-    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    for (int i = 0; i < sizeOfRoster; ++i)   // FIXME : incorporate the following sizeof fruit/sizeof fruit[0];
     {
         if (classRosterArray[i] != nullptr)
         {
             classRosterArray[i]->print();
         }
     }
+    std::cout << "\n";
 }
 
 void Roster::printDaysInCourse(std::string studentId)
 {
-    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    for (int i = 0; i < sizeOfRoster; ++i)
     {
         if (studentId == classRosterArray[i]->getStudentId())
         {
@@ -80,7 +95,7 @@ void Roster::printInvalidEmails()
     int atPosition = 0;
     int periodPosition = 0;
 
-    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    for (int i = 0; i < sizeOfRoster; ++i)
     {
         std::string emailAddress = classRosterArray[i]->getEmailAddress();
 
@@ -90,7 +105,7 @@ void Roster::printInvalidEmails()
             // check for spaces, if present then print email address
             if (character == ' ')
             {
-                std::cout << emailAddress;
+                std::cout << emailAddress << "\n";
                 break;
             }
 
@@ -102,23 +117,19 @@ void Roster::printInvalidEmails()
 
                 if (atPosition < 0 || periodPosition < 0)
                 {
-                    std::cout << emailAddress;
+                    std::cout << emailAddress << "\n";
                     break;
                 }
 
             }
-
-
-
-// if any fail then print the email to console
         }
-
     }
+    std::cout << "\n";
 }
 
 void Roster::printByDegreeProgram(int degreeProgram)
 {
-    for (int i = 0; i < sizeof(classRosterArray); ++i)
+    for (int i = 0; i < sizeOfRoster; ++i)
     {
         if (degreeProgram == classRosterArray[i]->getDegreeType())
         {
@@ -129,7 +140,7 @@ void Roster::printByDegreeProgram(int degreeProgram)
 
 Roster::~Roster()
 {
-
+    std::cout << "Instance destroyed\n";
 }
 
 int main()
@@ -232,16 +243,20 @@ int main()
         currentCommaPosition = 0;
 
     }
+    std::cout << "\n";
 
-    //classRoster.printAll();
-    //classRoster.printAll();
+    classRoster.printAll();
     classRoster.printInvalidEmails();
 
-    //for (int i = 0; i < sizeof(classRoster); ++i)
+    //for (int i = 0; i < sizeof(sizeOfRoster); ++i)
     //{
-    //    std::cout << i;
+    //    classRoster[i]->print();
     //}
 
+    classRoster.printByDegreeProgram(SOFTWARE);
+    classRoster.remove("A3");
+    classRoster.remove("A3");
+    classRoster.~Roster();
 
     return 0;
 }

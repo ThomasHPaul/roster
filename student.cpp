@@ -14,7 +14,9 @@ Student::Student(std::string studentId, std::string firstName, std::string lastN
 	this->lastName = lastName;
 	this->emailAddress = emailAddress;
 	this->age = age;
-	this->daysToComplete3Courses = daysToComplete3Courses;
+	this->daysToComplete3Courses[0] = daysInCourse1;
+	this->daysToComplete3Courses[1] = daysInCourse2;
+	this->daysToComplete3Courses[2] = daysInCourse3;
 	this->degreeType = degreeType;
 }
 void Student::setStudentId(std::string studentId)
@@ -86,12 +88,6 @@ Student::~Student()
 }
 
 
-std::string studentId;
-std::string firstName;
-std::string lastName;
-std::string emailAddress;
-int age;
-int daysToComplete3Courses[3];
-Degree degreeType;
+
 
 

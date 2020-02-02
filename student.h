@@ -35,7 +35,7 @@ private:
 	std::string lastName;
 	std::string emailAddress;
 	int age;
-	int* daysToComplete3Courses;
+	int daysToComplete3Courses[3];
 	Degree degreeType;
 
 };
