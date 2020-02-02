@@ -81,13 +81,28 @@ void Roster::printAll()
 
 void Roster::printDaysInCourse(std::string studentId)
 {
+    int* daysInCourse;
+    double sum = 0.0;
+    int length = 0;
+    int course1 = 0;
+    int course2 = 0;
+    int course3 = 0;
+    int ave = 0;
+
     for (int i = 0; i < sizeOfRoster; ++i)
     {
         if (studentId == classRosterArray[i]->getStudentId())
         {
-            classRosterArray[i]->getDaysToComplete3Courses();
+            daysInCourse = classRosterArray[i]->getDaysToComplete3Courses();
+            sum += daysInCourse[0];
+            sum += daysInCourse[1];
+            sum += daysInCourse[2];
+
+            ave = sum / 3;
         }
     }
+
+    std::cout << "This student has an average of " << ave << " days to finish 3 courses\n";
 }
 
 void Roster::printInvalidEmails()
@@ -248,10 +263,12 @@ int main()
     classRoster.printAll();
     classRoster.printInvalidEmails();
 
-    //for (int i = 0; i < sizeof(sizeOfRoster); ++i)
-    //{
-    //    classRoster[i]->print();
-    //}
+    for (int i = 0; i < sizeOfRoster; ++i)
+    {
+        classRoster.printDaysInCourse(classRoster.classRosterArray[i]->getStudentId());
+    }
+
+    std::cout << "\n";
 
     classRoster.printByDegreeProgram(SOFTWARE);
     classRoster.remove("A3");
